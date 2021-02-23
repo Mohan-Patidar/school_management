@@ -18,5 +18,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['middleware' => ['auth', 'disablepreventback']], function () {
+   
+   
+    Route::resource('/add_class','App\Http\Controllers\ClassController');
+    Route::resource('/student','App\Http\Controllers\StudentController');
+ 
+
+   
+    
+    
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
