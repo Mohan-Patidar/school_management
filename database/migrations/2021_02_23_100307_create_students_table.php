@@ -26,7 +26,6 @@ class CreateStudentsTable extends Migration
             $table->string('address')->nullable();
             $table->string('aadhar_no')->nullable();
             $table->string('samarg_id')->nullable();
-            $table->string('student_class')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('mobile_no2')->nullable();
             $table->string('account_no')->nullable();

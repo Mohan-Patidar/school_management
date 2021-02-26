@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect('add_class');
+        return redirect('students');
     }
 }

@@ -22,9 +22,8 @@ Route::group(['middleware' => ['auth', 'disablepreventback']], function () {
    
    
     Route::resource('/add_class','App\Http\Controllers\ClassController');
-    Route::resource('/student','App\Http\Controllers\StudentController');
- 
-
+    Route::resource('/students','App\Http\Controllers\StudentController');
+    Route::get('/getdata', '\App\Http\Controllers\AjaxController@getdata')->name('getdata');
    
     
     

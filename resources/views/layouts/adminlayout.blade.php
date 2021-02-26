@@ -30,12 +30,21 @@
                 <div class="main-menus">
                     <div class="menu-logo">
                         <a href="#">
-                            <img src="{{url('/')}}/assets/image/logo.svg" alt="">
+                            <img src="{{url('/')}}/assets/image/logo.jpg" alt="">
                         </a>
                     </div>
                     <ul>
 
-                        <li class="active">
+
+                        <li @if(request()->segment(1) == 'students') class="active" @endif>
+                            <a href="{{ url('/students') }}">
+                                <i>
+                                    <img src="{{url('/')}}/assets/image/short-code.svg" class="menu-show" alt="">
+                                </i>
+                                <span>Student</span>
+                            </a>
+                        </li>
+                        <li @if(request()->segment(1) == 'add_class') class="active" @endif>
                             <a href="{{ url('/add_class') }}">
                                 <i>
                                     <img src="{{url('/')}}/assets/image/expertise-area.svg" class="menu-show" alt="">
@@ -43,38 +52,22 @@
                                 <span>Class</span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="{{ url('/student') }}">
-                                <i>
-                                    <img src="{{url('/')}}/assets/image/short-code.svg" class="menu-show" alt="">
-                                </i>
-                                <span>Student</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i>
-                                    <img src="{{url('/')}}/assets/image/profile.svg" class="menu-show" alt="">
-                                </i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                      
-                            <a href="{{ route('logout') }}"  
-                             onclick="event.preventDefault();
+
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                      <i>
+                                <i>
                                     <img src="{{url('/')}}/assets/image/logout.svg" class="menu-show" alt="">
-                                  
+
                                 </i>
-                                        <span>Log Out</span>
-                               
-                               
+                                <span>Log Out</span>
+
+
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -85,49 +78,101 @@
 
 
 
-        </main>
+    </main>
     <!-- dashboard ends here -->
 
     <!-- data table js -->
     <script src="{{url('/')}}/assets/js/jquery-3.5.1.min.js"></script>
-  
-   
+
+    
     <script src="{{url('/')}}/assets/js/data-table.js"></script>
-   
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <!-- custom js -->
     <script src="{{url('/')}}/assets/js/custom.js"></script>
-    <script>
-$('.delete-confirm').click(function(event) {
-      var form =  $(this).closest("form");
-      var name = $(this).data("name");
-      var id = $(this).data("id");
-      event.preventDefault();
-      swal({
-          title: `Are you sure you want to delete ${name}?`,
-    
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-            $.ajax({
-            url: "{{route('add_class.store')}}"+'/'+id, 
-            type: "DELETE", 
-            data:{id:id,
-                "_token": "{{ csrf_token() }}",},  
-            success:function(data){
-               location.reload();
-                
-                
-           }  
 
-       });  
-        }
-      });
-  });
-</script>
+    <script>
+        $('select').on('change', function() {
+            var id = $(this).val();
+
+            $.ajax({
+                url: 'getdata',
+                method: "get",
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    $('#example').html(data);
+                }
+            });
+
+        });
+    </script>
+    <script>
+        $('.delete-confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            var id = $(this).data("id");
+            event.preventDefault();
+            swal({
+                    title: `Are you sure you want to delete ${name}?`,
+
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "{{route('add_class.store')}}" + '/' + id,
+                            type: "DELETE",
+                            data: {
+                                id: id,
+                                "_token": "{{ csrf_token() }}",
+                            },
+                            success: function(data) {
+                                location.reload();
+
+
+                            }
+
+                        });
+                    }
+                });
+        });
+        $('body').on('click','.student-delete',function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            var id = $(this).data("id");
+            event.preventDefault();
+            swal({
+                    title: `Are you sure you want to delete ${name}?`,
+
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "{{route('students.store')}}" + '/' + id,
+                            type: "DELETE",
+                            data: {
+                                id: id,
+                                "_token": "{{ csrf_token() }}",
+                            },
+                            success: function(data) {
+                                location.reload();
+
+
+                            }
+
+                        });
+                    }
+                });
+        });
+    </script>
+    
 </body>
 
 </html>

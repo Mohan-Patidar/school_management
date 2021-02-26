@@ -78,7 +78,7 @@
         <div class="login-box">
             <div class="logo-box">
                 <a href="#">
-                    <img src="{{url('/')}}/assets/image/logo.svg" alt="">
+                    <img src="{{url('/')}}/assets/image/logo.jpg" alt="">
                 </a>
             </div>
             <div class="login-bg">
