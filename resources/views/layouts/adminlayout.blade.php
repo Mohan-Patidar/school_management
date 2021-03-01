@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{url('/')}}/assets/css/global.css">
+     <link rel="stylesheet" href="{{url('/')}}/assets/css/data-table.css"> 
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                 <!-- logo -->
                 <div class="main-logo">
                     <a href="#">
-                        <img src="{{url('/')}}/assets/image/logo.svg" alt="">
+                        <img src="{{url('/')}}/assets/image/letter-head.png" alt="">
                     </a>
                 </div>
                 <div class="overlay-close"></div>
@@ -30,7 +31,7 @@
                 <div class="main-menus">
                     <div class="menu-logo">
                         <a href="#">
-                            <img src="{{url('/')}}/assets/image/logo.jpg" alt="">
+                            <img src="{{url('/')}}/assets/image/letter-head.png" alt="">
                         </a>
                     </div>
                     <ul>
@@ -82,32 +83,36 @@
     <!-- dashboard ends here -->
 
     <!-- data table js -->
-    <script src="{{url('/')}}/assets/js/jquery-3.5.1.min.js"></script>
-
-    
-    <script src="{{url('/')}}/assets/js/data-table.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+     <script src="{{url('/')}}/assets/js/jquery-3.5.1.min.js"></script>
+   
+    <script src="{{url('/')}}/assets/js/dataTables.min.js"></script>
+    <script src="{{url('/')}}/assets/js/dataTables.buttons.min.js"></script>
+    <script src="{{url('/')}}/assets/js/buttons.html5.min.js"></script>
+    <script src="{{url('/')}}/assets/js/sweetalert.min.js"></script>
     <!-- custom js -->
     <script src="{{url('/')}}/assets/js/custom.js"></script>
 
     <script>
         $('select').on('change', function() {
             var id = $(this).val();
-
+            if(id==0){
+                location.reload();
+            }else{
             $.ajax({
                 url: 'getdata',
                 method: "get",
                 data: {
-                    id: id
+                    id: id,
+                    
                 },
                 success: function(data) {
-                    $('#example').html(data);
+                    $('#student-table').html(data);
                 }
             });
-
+}
         });
     </script>
+  
     <script>
         $('.delete-confirm').click(function(event) {
             var form = $(this).closest("form");
@@ -171,7 +176,24 @@
                     }
                 });
         });
+   
     </script>
+   
+    <script>
+        $('.import').click(function(){
+        $("#file").click();
+        });
+        $('#file').change(function(){
+            $('#submit').click();
+        });
+    </script>
+    <script>
+ 
+        $('#export').click(function(){
+           $('.buttons-csv').click();
+        });
+    </script>
+    
     
 </body>
 

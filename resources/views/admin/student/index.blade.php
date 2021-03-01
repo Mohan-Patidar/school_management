@@ -14,29 +14,44 @@
             <div class="page-color">
                 <div class="page-header">
                     <div class="page-title">
-                        student <span> </span>
+                         <span>student </span>
                     </div>
                   
                     <div class="page-btn">
                         <a href="{{route('students.create')}}" class="add-btn">Add Student</a>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="tabel-head">
+                    <div class="form-group">
                                     <label>Class</label>
                                     
                                     <select name="gbs_id" id="gbs_id">
-                                    <option value="" selected>Select Class</option>
+                                    <option value="0">Select Class</option>
                                     @foreach($tests as $test)
                                         <option value="{{$test->id}}" >{{$test->class_name}}</option>
                                     @endforeach
                                     </select>
                                 </div>
-                <div class="page-table">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                <form action="{{ route('import') }}" method="Post" enctype="multipart/form-data" class="export-form">
+
+                @csrf
+
+                <input type="file" name="file" id="file" class="my-profile-choose-file">
+
+                <br>
+                <input type="submit" id="submit"  style="display: none;">
+                <!--<button type="button" class="btn btn-success import">Import Student Data</button>-->
+                <!--<a class="btn btn-warning" href="{{ route('export') }}">Export Student Data</a>-->
+                <a href="#" class="btn btn-warning" id ="export" role='button'>Export Student Data</a>
+            </form>
+                </div>
+                <div class="page-table" id="dvData">
+                    <table id="student-table" class="table table-bordered table-striped" style="width:100%;">
                         <thead>
                             <tr>
                                 <th>S.No.</th>
                                 <th>Student Id</th>
+                                <th>Profile</th>
                                 <th>Name</th>
                                 <th>Scholar No.</th>
                                 <th>Class</th>
@@ -57,8 +72,10 @@
                         @php $i = 0; @endphp
                         @foreach($students as $student)
                             <tr>
+                            
                                 <td>@php echo ++$i @endphp</td>
                                 <td>{{$student->student_id}}</td>
+                                <td><img class="student-img"  src="{{asset('image/profile_picture/' .$student->profile_picture) }}" /></td>
                                 <td>{{$student->name}}</td>
                                 <td>{{$student->scholar_no}}</td>
                                 @foreach($tests as $test)

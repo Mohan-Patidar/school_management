@@ -41,6 +41,19 @@ class StudentController extends Controller
         $students->mobile_no2=$request->mobile_no2;
         $students->add_session=$request->add_session;
         $students->account_no=$request->account_no;
+        
+        if ($request->hasFile('profile_picture')) {
+           
+                $profile = $request->file('profile_picture');
+                $file_name = time() . '.' . $profile->getClientOriginalExtension();
+                $path = public_path('../image/profile_picture');
+                $profile->move($path, $file_name);
+                $students->profile_picture = $file_name;
+            }
+            else{
+                $students->profile_picture="";
+                }
+        
 
         $students->save();
         Session::flash('message', 'Student added successfuly!');
@@ -81,9 +94,22 @@ class StudentController extends Controller
         $students->mobile_no2=$request->mobile_no2;
         $students->add_session=$request->add_session;
         $students->account_no=$request->account_no;
+        if ($request->hasFile('profile_picture')) {
+           
+            $profile = $request->file('profile_picture');
+            $file_name = time() . '.' . $profile->getClientOriginalExtension();
+            $path = public_path('../image/profile_picture');
+            $profile->move($path, $file_name);
+            $students->profile_picture = $file_name;
+        }
+        else{
+            
+            $profile =  $students->profile_picture;
+            $students->profile_picture = $profile;
+            }
         
         $students->update(); 
-        Session::flash('message', ' data updated successfuly!');
+        Session::flash('message', 'data updated successfuly!');
         return redirect('students');
 
     

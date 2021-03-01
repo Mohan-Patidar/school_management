@@ -17,7 +17,7 @@
             </div>
             <div class="page-table">
                 <div class="profile-box container-fluid">
-                    <form class="add-student-form" method="Post" action="{{route('students.store')}}">
+                    <form class="add-student-form" method="Post" action="{{route('students.store')}}" enctype="multipart/form-data">
                         <!-- <div class="profile-title">
                                 Personal Information
                             </div> -->
@@ -124,6 +124,12 @@
                                 <div class="form-group">
                                     <label>Bank Account No.</label>
                                     <input type="text" name="account_no" id="account_no">
+                                </div>
+                            </div>
+                            <div class="col-6 last-input-margin">
+                                <div class="form-group">
+                                    <label> Picture </label>
+                                    <input type="file" name="profile_picture" id="profile_picture">
                                 </div>
                             </div>
                             <div class="col-12 text-center">

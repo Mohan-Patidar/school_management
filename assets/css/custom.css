@@ -430,6 +430,12 @@ form textarea {
 .text-center p a:hover {
     color: #DF352D;
 }
+.dataTables_scrollBody tr:first-child td {
+    border-top: 0;
+}
+.dataTables_scrollBody thead {
+    display: none;
+}
 
 
 /* Login page css end */

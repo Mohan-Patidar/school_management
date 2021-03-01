@@ -6,7 +6,7 @@ $(document).ready(function () {
     // Datatables
 
     $('#example').dataTable({
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "lengthMenu": [[10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         "language": {
     searchPlaceholder: 'Search...',
     search: '<i class="fa fa-search" aria-hidden="true"></i>'

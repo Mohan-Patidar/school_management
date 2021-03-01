@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -24,9 +24,17 @@ Route::group(['middleware' => ['auth', 'disablepreventback']], function () {
     Route::resource('/add_class','App\Http\Controllers\ClassController');
     Route::resource('/students','App\Http\Controllers\StudentController');
     Route::get('/getdata', '\App\Http\Controllers\AjaxController@getdata')->name('getdata');
-   
+
+
+    
     
     
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('export', 'App\Http\Controllers\MyController@export')->name('export');
+ 
+Route::post('import', 'App\Http\Controllers\MyController@import')->name('import');

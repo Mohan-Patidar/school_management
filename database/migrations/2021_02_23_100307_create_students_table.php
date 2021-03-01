@@ -30,6 +30,7 @@ class CreateStudentsTable extends Migration
             $table->string('mobile_no2')->nullable();
             $table->string('account_no')->nullable();
             $table->string('add_session')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }

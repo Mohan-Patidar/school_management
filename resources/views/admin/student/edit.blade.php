@@ -26,7 +26,7 @@
             </div>
             <div class="page-table">
                 <div class="profile-box container-fluid">
-                    <form class="add-student-form" method="Post" action="{{route('students.update',$students->id)}}">
+                    <form class="add-student-form" method="Post" action="{{route('students.update',$students->id)}}" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="PUT">
                         @csrf
                         <!-- <div class="profile-title">
@@ -138,6 +138,12 @@
                                 <div class="form-group">
                                     <label>Bank Account No.</label>
                                     <input type="text" name="account_no" id="account_no" value="{{$students->account_no}}">
+                                </div>
+                            </div>
+                            <div class="col-6 last-input-margin">
+                                <div class="form-group">
+                                    <label> Picture </label>
+                                    <input type="file"  value="{{$students->profile_picture}}" name="profile_picture" id="profile_picture">
                                 </div>
                             </div>
                             <div class="col-12 text-center">
